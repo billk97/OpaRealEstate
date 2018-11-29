@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Presenter.Sale"></activity>
+        <activity android:name=".Presenter.Sale" />
+        <activity android:name=".Presenter.Search"></activity>
     </application>
 
 </manifest>

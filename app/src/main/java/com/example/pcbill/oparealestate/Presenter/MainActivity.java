@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent myIntent = new Intent(view.getContext(),onoma);
-                //startActivityForResult(myIntent,0);
+                Intent myIntent = new Intent(view.getContext(), Search.class);
+                startActivityForResult(myIntent,0);
             }
         });
         Sale.setOnClickListener(new View.OnClickListener() {
