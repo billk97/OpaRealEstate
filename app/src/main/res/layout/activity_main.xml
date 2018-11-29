@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presenter.MainActivity">
+
+    <TextView
+        android:id="@+id/MainTextView"
+        android:layout_width="284dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="156dp"
+        android:fontFamily="sans-serif"
+        android:text="AUEB Real Estate"
+        android:textColor="#353333"
+        android:textSize="33dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Searchbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Αναζήτηση"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Salebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MainTextView"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <Button
+        android:id="@+id/Salebutton"
+        android:layout_width="121dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Πώληση"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Searchbutton"
+        app:layout_constraintTop_toBottomOf="@+id/MainTextView"
+        app:layout_constraintVertical_bias="0.508" />
+
+</android.support.constraint.ConstraintLayout>
