@@ -41,8 +41,8 @@ public class Search extends AppCompatActivity {
             public void onClick(View view) {
                 Toast toast = Toast.makeText(getApplicationContext(),"Αναζήτηση",Toast.LENGTH_SHORT);
                 toast.show();
-                //Intent intent= new Intent(getApplicationContext(),List.class);
-               // startActivityForResult(intent,0);
+                Intent intent= new Intent(getApplicationContext(),ListView.class);
+                startActivityForResult(intent,0);
             }
         });
         /**CheckBox field*/

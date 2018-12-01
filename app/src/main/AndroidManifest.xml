@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Presenter.Sale" />
-        <activity android:name=".Presenter.Search"></activity>
+        <activity android:name=".Presenter.Search" />
+        <activity android:name=".Presenter.ListView" />
     </application>
 
 </manifest>
