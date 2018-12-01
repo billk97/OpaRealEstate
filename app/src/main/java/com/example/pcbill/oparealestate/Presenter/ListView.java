@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import com.example.pcbill.oparealestate.R;
 
 import java.lang.reflect.Array;
@@ -23,7 +23,11 @@ import static android.app.PendingIntent.getActivity;
 public class  ListView extends AppCompatActivity {
     private TextView ListViewTextView;
     private Button ListViewBackButton;
-
+    public static android.widget.ListView ListViewListView;
+    public String [] data ={
+            "Οικόπεδο - Αθήνα - Σμολικα - 2 - 10443 - 18/1/97 - 6",
+            "Διαμέρισμα - Πατρα - Δυραχιου - 6 - 10543 - 18/1/95 - 7"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +41,15 @@ public class  ListView extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-
-    }
-    //todo needs fix 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstaceState)
-    {
-        ArrayAdapter<String> myAdaptert;
-        String [] data ={
-                "Οικόπεδο - Αθήνα - Σμολικα - 2 - 10443 - 18/1/97 - 6",
-                "Διαμέρισμα - Πατρα - Δυραχιου - 6 - 10543 - 18/1/95 - 7"
-        };
-        List<String> myList = new ArrayList<String>(Arrays.asList(data));
-        //myAdaptert = new ArrayAdapter<String>(getApplicationContext(),R.layout.activity_list_view,R.id.somethin,myList);
-        View rootView = inflater.inflate(R.layout.activity_list_view,container,false);
-        //ListView listView=(ListView) rootView.findViewById(R.id.listViewListView);
-       // listView.setAdapter(myAdaptert);
-        return  rootView;
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);
+        ListViewListView.setAdapter(arrayAdapter);
     }
 
     private void initializer()
     {
         ListViewTextView=(TextView)findViewById(R.id.ListViewTextView);
         ListViewBackButton=(Button)findViewById(R.id.ListViewBackButton);
+        ListViewListView=(android.widget.ListView)findViewById(R.id.listViewListView);
     }
 
 }
