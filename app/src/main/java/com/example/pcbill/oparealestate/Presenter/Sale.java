@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pcbill.oparealestate.Controler.Controler;
 import com.example.pcbill.oparealestate.R;
 
 public class Sale extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class Sale extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
         Initializer();
+        final Controler controler = new Controler();
         SaleBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,15 +40,11 @@ public class Sale extends AppCompatActivity {
         SaleInsertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Type =SaleType.getText().toString();
-                String City= SaleCity.getText().toString();
-                String StreetNumber=SaleStreetNumber.getText().toString();
-                String StreetName =SaleStreetName.getText().toString();
-                String PostNumber=SalePostNumber.getText().toString();
-                String Date = SaleDate.getText().toString();
-                String EstateNumber=SaleDate.getText().toString();
                 //in this place a controller Function must be called
-                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση",Toast.LENGTH_LONG);
+                String output = controler.checkData(SaleType.getText().toString(),SaleCity.getText().toString(),
+                        SaleStreetNumber.getText().toString(),SaleStreetName.getText().toString(),SalePostNumber.getText().toString(),
+                        SaleDate.getText().toString(),SaleDate.getText().toString());
+                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση"+output,Toast.LENGTH_LONG);
                 toast.show();
             }
         });

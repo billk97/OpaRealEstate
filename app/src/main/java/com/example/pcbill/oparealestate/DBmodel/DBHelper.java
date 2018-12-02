@@ -1,4 +1,4 @@
-package com.example.pcbill.oparealestate.Controler;
+package com.example.pcbill.oparealestate.DBmodel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

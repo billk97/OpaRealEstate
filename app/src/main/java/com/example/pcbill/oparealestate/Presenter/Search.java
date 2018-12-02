@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pcbill.oparealestate.Controler.Controler;
 import com.example.pcbill.oparealestate.R;
 
 public class Search extends AppCompatActivity {
@@ -21,12 +22,16 @@ public class Search extends AppCompatActivity {
     private CheckBox SearchFildCheckBox;
     private CheckBox SearchFlatCheckBox;
     private CheckBox SearchBuildingCheckBox;
-
+    private String value1="";
+    private String value2="";
+    private String value3="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        final Controler controler = new Controler();
         initializer();
+        controler.CheckSearchData(SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
         /**Buck Button*/
         SearchBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,28 +44,26 @@ public class Search extends AppCompatActivity {
         SearchSelectBUtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(SearchFildCheckBox.isChecked())
+                {
+                    controler.setValue1("Οικόπαιδο");
+                }
+                if(SearchFlatCheckBox.isChecked())
+                {
+                    controler.setValue2("Διαμέρισμα");
+                }
+                if(SearchBuildingCheckBox.isChecked())
+                {
+                    controler.setValue3("Κτίριο");
+                }
                 Toast toast = Toast.makeText(getApplicationContext(),"Αναζήτηση",Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent= new Intent(getApplicationContext(),ListView.class);
                 startActivityForResult(intent,0);
             }
         });
-        /**CheckBox field*/
-        SearchFildCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(SearchFildCheckBox.isChecked())
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(),"Checked",Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else
-                    {
-                        Toast toast = Toast.makeText(getApplicationContext(),"UnChecked",Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-            }
-        });
+
+
     }
     private void initializer()
     {

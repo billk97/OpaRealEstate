@@ -1,6 +1,5 @@
 package com.example.pcbill.oparealestate.Presenter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pcbill.oparealestate.Controler.DBHelper;
+import com.example.pcbill.oparealestate.DBmodel.DBHelper;
 import com.example.pcbill.oparealestate.R;
 
 public class MainActivity extends AppCompatActivity {
