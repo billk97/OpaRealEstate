@@ -1,8 +1,8 @@
 package com.example.pcbill.oparealestate.Presenter;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pcbill.oparealestate.Controler.Controler;
+import com.example.pcbill.oparealestate.Controler.SearchControler;
 import com.example.pcbill.oparealestate.R;
 
 public class Search extends AppCompatActivity {
@@ -29,9 +29,9 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        final Controler controler = new Controler();
+        final SearchControler controler = new SearchControler();
         initializer();
-        controler.CheckSearchData(SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
+        controler.checkData(SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
         /**Buck Button*/
         SearchBackButton.setOnClickListener(new View.OnClickListener() {
             @Override

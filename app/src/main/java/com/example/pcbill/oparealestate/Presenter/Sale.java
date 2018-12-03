@@ -1,5 +1,4 @@
 package com.example.pcbill.oparealestate.Presenter;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pcbill.oparealestate.Controler.Controler;
+import com.example.pcbill.oparealestate.Controler.SaleControler;
 import com.example.pcbill.oparealestate.R;
 
 public class Sale extends AppCompatActivity {
@@ -29,7 +28,7 @@ public class Sale extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
         Initializer();
-        final Controler controler = new Controler();
+        final SaleControler saleControler = new SaleControler();
         SaleBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +40,7 @@ public class Sale extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //in this place a controller Function must be called
-                String output = controler.checkData(SaleType.getText().toString(),SaleCity.getText().toString(),
+                String output = saleControler.checkData(SaleType.getText().toString(),SaleCity.getText().toString(),
                         SaleStreetNumber.getText().toString(),SaleStreetName.getText().toString(),SalePostNumber.getText().toString(),
                         SaleDate.getText().toString(),SaleDate.getText().toString());
                 Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση"+output,Toast.LENGTH_LONG);
