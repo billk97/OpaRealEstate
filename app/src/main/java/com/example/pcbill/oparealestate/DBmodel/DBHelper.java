@@ -1,6 +1,8 @@
 package com.example.pcbill.oparealestate.DBmodel;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,23 +11,24 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper
 {
-        public static final String TABLE_NAME= "building";
-        public static final String ID="ID";
-        public static final String TYPE= "";
-        public static final String CITY= "";
-        public static final String ADDRESS= "";
-        public static final String ADDRESSNUMBER= "";
-        public static final String TK= "";
-        public static final String DATE= "";
-        public static final String ROOMS= "";
+        private static final String TABLE_NAME= "building";
+        private static final String ID="ID";
+        private  static final String TYPE= "TYPE";
+        private static final String CITY= "CITY";
+        private static final  String ADDRESS= "ADDRESS";
+        private static final String ADDRESSNUMBER= "ADDRESSNUMBER";
+        private static final  String TK= "TK";
+        private  static final String DATE= "DATE";
+        private  static final String ROOMS= "ROOMS";
 
-    public DBHelper( Context context,String dbName,Integer version) {
-        super(context, dbName, null, version);
+    public DBHelper( Context context) {
+        super(context, TABLE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         tableCreateStatements(sqLiteDatabase);
+        System.out.println("data added");
     }
 
     @Override
@@ -35,21 +38,47 @@ public class DBHelper extends SQLiteOpenHelper
     }
 
     private void tableCreateStatements(SQLiteDatabase sqLiteDatabase) {
-        try{
-//            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +
-//                    "("+ID + " INT  PRIMARY KEY AUTOINCREMENT, " +
-//                    TYPE +" VARCHAR(255), " +
-//                    CITY +" VARCHAR(255), "+
-//                    ADDRESS +" VARCHAR(255), "+
-//                    ADDRESSNUMBER+ " VARCHAR(255), "+
-//                    TK+" VARCHAR(255), "+
-//                    DATE+" VARCHAR(255), "+
-//                    ROOMS+" VARCHAR(255), "+
-//                    ")"
-//                    );
-        }catch (SQLException e)
-        {e.printStackTrace();}
+
+            String sql = "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME + "(" +
+                    ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, " +
+                    TYPE +" TEXT, " +
+                    CITY +" TEXT, "+
+                    ADDRESS +" TEXT, "+
+                    ADDRESSNUMBER+ " TEXT, "+
+                    TK+" TEXT, "+
+                    DATE+" TEXT, "+
+                    ROOMS+" TEXT )";
+            sqLiteDatabase.execSQL(sql);
+            System.out.println("data added");
+
     }
-    //public String Select(city,name,value1,value2,value3){}
-    //public void Insert(type,city,adress,addressNumber,tk,hmerominia,ardomation);
+
+    public boolean Insert(String type,String city,String adress,String addressNumber,String tk,String hmerominia,String ardomation)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TYPE,type);
+        contentValues.put(CITY,city);
+        contentValues.put(ADDRESS,adress);
+        contentValues.put(ADDRESSNUMBER,addressNumber);
+        contentValues.put(TK,tk);
+        contentValues.put(DATE,hmerominia);
+        contentValues.put(ROOMS,ardomation);
+        long result = sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+        if(result==-1)
+        {
+            return false;
+        }
+        else
+         {
+                return true;
+         }
+    }
+
+    public Cursor Select(String city, String roomNumber, String value1, String value2, String value3)
+    {
+        SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + city + " AND " + ROOMS + " = " + roomNumber + " AND " + TYPE + " = " + value1 + " AND " + TYPE + " = " + value2 + " AND " + TYPE + " = " + value3;
+        return sqLiteDatabase.rawQuery(sql,null);
+    }
 }//end DBHelper

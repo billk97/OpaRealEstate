@@ -13,7 +13,7 @@ public class SearchControler {
         city=CheckInput(city);
         roomNumber=CheckInput(roomNumber);
         //call a function select from the dbhelper
-        //Db.select(city,room,number,value1,value2,value3)
+        //Db.select(city,roomnumber,value1,value2,value3)
     }
     private String CheckInput(String Input)
     {

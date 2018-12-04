@@ -40,9 +40,9 @@ public class Sale extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //in this place a controller Function must be called
-                String output = saleControler.checkData(SaleType.getText().toString(),SaleCity.getText().toString(),
-                        SaleStreetNumber.getText().toString(),SaleStreetName.getText().toString(),SalePostNumber.getText().toString(),
-                        SaleDate.getText().toString(),SaleDate.getText().toString());
+                String output = saleControler.checkData(getApplicationContext(),SaleType.getText().toString(),SaleCity.getText().toString(),
+                        SaleStreetName.getText().toString(),SaleStreetNumber.getText().toString(),SalePostNumber.getText().toString(),
+                        SaleDate.getText().toString(),SaleEstateNumber.getText().toString());
                 Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση"+output,Toast.LENGTH_LONG);
                 toast.show();
             }

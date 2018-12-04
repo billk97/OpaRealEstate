@@ -3,6 +3,7 @@ package com.example.pcbill.oparealestate.Presenter;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,11 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeVariables();
-        DBHelper db = new DBHelper();
+        //Log.d("bill","ok");
         try {
-
-
-            db.CreateTable();
             Toast toast =Toast.makeText(getApplicationContext(), "created1",Toast.LENGTH_LONG);
             toast.show();
 
