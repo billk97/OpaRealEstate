@@ -35,7 +35,6 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         final SearchControler controler = new SearchControler();
         initializer();
-        controler.checkData(SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
         /**Buck Button*/
         SearchBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +47,7 @@ public class Search extends AppCompatActivity {
         SearchSelectBUtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                controler.checkData(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
                 if(SearchFildCheckBox.isChecked())
                 {
                     controler.setValue1("Οικόπαιδο");

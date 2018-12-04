@@ -49,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper
                     DATE+" TEXT, "+
                     ROOMS+" TEXT )";
             sqLiteDatabase.execSQL(sql);
-            System.out.println("data added");
+
 
     }
 
@@ -71,8 +71,16 @@ public class DBHelper extends SQLiteOpenHelper
         }
         else
          {
+             System.out.println("data added");
                 return true;
          }
+    }
+
+    public  Cursor SelectAll()
+    {
+        SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
+        String sql = "SELECT * FROM " + TABLE_NAME ;
+        return sqLiteDatabase.rawQuery(sql,null);
     }
 
     public Cursor Select(String city, String roomNumber, String value1, String value2, String value3)

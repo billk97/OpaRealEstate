@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.example.pcbill.oparealestate.Controler.SearchControler;
 import com.example.pcbill.oparealestate.R;
 
 import java.lang.reflect.Array;
@@ -23,21 +25,22 @@ import static android.app.PendingIntent.getActivity;
 public class  ListView extends AppCompatActivity {
     private TextView ListViewTextView;
     private Button ListViewBackButton;
+    private int i=2;
     public static android.widget.ListView ListViewListView;
-    public String [] data ={
-            "Οικόπεδο - Αθήνα - Σμολικα - 2 - 10443 - 18/1/97 - 6",
-            "Διαμέρισμα - Πατρα - Δυραχιου - 6 - 10543 - 18/1/95 - 7"
-    };
+    private  SearchControler searchControler= new SearchControler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
+        MakeItPretty();
         initializer();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,searchControler.getSelecedData());
+        ListViewListView.setAdapter(arrayAdapter);
+
+
+        /**Buck button function**/
         ListViewBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,8 +48,6 @@ public class  ListView extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);
-        ListViewListView.setAdapter(arrayAdapter);
     }
 
     private void initializer()
@@ -55,5 +56,15 @@ public class  ListView extends AppCompatActivity {
         ListViewBackButton=(Button)findViewById(R.id.ListViewBackButton);
         ListViewListView=(android.widget.ListView)findViewById(R.id.listViewListView);
     }
+
+    private void MakeItPretty()
+    {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
+    }
+
+
 
 }
