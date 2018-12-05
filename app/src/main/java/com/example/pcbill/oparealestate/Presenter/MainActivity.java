@@ -22,42 +22,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
-
+        MakeItPretty();
         initializeVariables();
-        //Log.d("bill","ok");
-        try {
-            Toast toast =Toast.makeText(getApplicationContext(), "created1",Toast.LENGTH_LONG);
-            toast.show();
-
-        } catch (Exception e) {
-            Toast toast =Toast.makeText(getApplicationContext(), (CharSequence) e,Toast.LENGTH_LONG);
-            toast.show();
-        }
-
+        /**Action taken when the search button is selected**/
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Creates a new Intent that onClick goes to activity Search
                 Intent myIntent = new Intent(view.getContext(), Search.class);
                 startActivityForResult(myIntent,0);
             }
         });
+        /**Action taken when the sale button is selected**/
         Sale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Creates a new Intent that onClick goes to activity Sale
                 Intent myIntent = new Intent(view.getContext(),Sale.class);
                 startActivityForResult(myIntent,0);
             }
         });
 
     }
+    /**This function connects the Xml file with thw java*/
     private void initializeVariables()
     {
         textView=(TextView) findViewById(R.id.MainTextView);
         Search=(Button)findViewById(R.id.Searchbutton);
         Sale=(Button)findViewById(R.id.Salebutton);
+    }
+    /**self explanatory **/
+    private void MakeItPretty()
+    {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
     }
 }

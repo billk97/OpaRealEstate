@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper
 {
+    /**Initialisation of the the variable for the creation of the table**/
         private static final String TABLE_NAME= "building";
         private static final String ID="ID";
         private  static final String TYPE= "TYPE";
@@ -24,9 +25,10 @@ public class DBHelper extends SQLiteOpenHelper
     public DBHelper( Context context) {
         super(context, TABLE_NAME, null, 1);
     }
-
+    /**this function is automatically created when an object is created**/
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        /**calls to create a new table**/
         tableCreateStatements(sqLiteDatabase);
         System.out.println("data added");
     }
@@ -36,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
-
+    /**create the table **/
     private void tableCreateStatements(SQLiteDatabase sqLiteDatabase) {
 
             String sql = "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME + "(" +
@@ -48,11 +50,12 @@ public class DBHelper extends SQLiteOpenHelper
                     TK+" TEXT, "+
                     DATE+" TEXT, "+
                     ROOMS+" TEXT )";
+            // executes the query
             sqLiteDatabase.execSQL(sql);
 
 
     }
-
+    /**this function Inserts the variable it received as parameters in the database**/
     public boolean Insert(String type,String city,String adress,String addressNumber,String tk,String hmerominia,String ardomation)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -75,18 +78,42 @@ public class DBHelper extends SQLiteOpenHelper
                 return true;
          }
     }
-
+    /**Selects all the data from the table**/
     public  Cursor SelectAll()
     {
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
         String sql = "SELECT * FROM " + TABLE_NAME ;
         return sqLiteDatabase.rawQuery(sql,null);
     }
-
+    /**Selects the designated data from the table / database **/
     public Cursor Select(String city, String roomNumber, String value1, String value2, String value3)
     {
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + city + " AND " + ROOMS + " = " + roomNumber + " AND " + TYPE + " = " + value1 + " AND " + TYPE + " = " + value2 + " AND " + TYPE + " = " + value3;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'" + city +"'" +
+                " AND " + ROOMS + " = " +"'" + roomNumber +"'" +
+                " AND " + TYPE + " = " + "'" +value1 +"'" +
+                " OR " + TYPE + " = " + "'" +value2 +"'" +
+                " OR " + TYPE + " = " + "'" +value3 +"'" ;
         return sqLiteDatabase.rawQuery(sql,null);
     }
+    /**Selects the designated data from the table / database **/
+    public Cursor Select(String city, String roomNumber, String value1, String value2)
+    {
+        SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = "  + "'" + city + "'" +
+                " AND " + ROOMS + " = " + "'" + roomNumber + "'" +
+                " AND " + TYPE + " = " + "'" + value1 +"'" +
+                " OR " + TYPE + " = " + "'" + value2 +"'" ;
+        return sqLiteDatabase.rawQuery(sql,null);
+    }
+
+    public Cursor Select(String city, String roomNumber, String value1)
+    {
+        SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'"+city+"'" +
+                " AND " + ROOMS + " = " + "'" + roomNumber +"'"  +
+                " AND " + TYPE + " = " + "'" + value1+"'"  ;
+        return sqLiteDatabase.rawQuery(sql,null);
+    }
+
 }//end DBHelper

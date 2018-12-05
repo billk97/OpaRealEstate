@@ -35,28 +35,29 @@ public class  ListView extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         MakeItPretty();
         initializer();
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,searchControler.getSelecedData());
-        ListViewListView.setAdapter(arrayAdapter);
-
-
+        /**Creation of an array list type String that contains the result from the select
+         * get the result from searchControler.getSelecedData() which allsow is an array list
+         * from the object searchControler**/
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,searchControler.getSelecedData());
+        ListViewListView.setAdapter(arrayAdapter);//just displays the array list created above in a listView
         /**Buck button function**/
         ListViewBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getApplicationContext(),Search.class);
                 startActivityForResult(intent,0);
+                finish();
             }
         });
     }
-
+    /**This function connects the Xml file with thw java*/
     private void initializer()
     {
         ListViewTextView=(TextView)findViewById(R.id.ListViewTextView);
         ListViewBackButton=(Button)findViewById(R.id.ListViewBackButton);
         ListViewListView=(android.widget.ListView)findViewById(R.id.listViewListView);
     }
-
+    /**its self explanatory :) **/
     private void MakeItPretty()
     {
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -22,17 +22,16 @@ public class Sale extends AppCompatActivity {
     private EditText SalePostNumber;
     private EditText SaleDate;
     private EditText SaleEstateNumber;
+    /**creates an object SaleControler to communicate with the controller **/
+    private SaleControler saleControler = new SaleControler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
+        MakeItPretty();
         Initializer();
-        final SaleControler saleControler = new SaleControler();
+        /**Action taken when the back button is pressed**/
         SaleBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,18 +39,22 @@ public class Sale extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
+        /**Action taken when the Insert button is pressed**/
         SaleInsertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //in this place a controller Function must be called
-                String output = saleControler.checkData(getApplicationContext(),SaleType.getText().toString(),SaleCity.getText().toString(),
+                /**calls the function check data from the controller
+                 * witch checks if the data is accurate and then calls the DBHelper to do the query **/
+                saleControler.checkData(getApplicationContext(),SaleType.getText().toString(),SaleCity.getText().toString(),
                         SaleStreetName.getText().toString(),SaleStreetNumber.getText().toString(),SalePostNumber.getText().toString(),
                         SaleDate.getText().toString(),SaleEstateNumber.getText().toString());
-                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση"+output,Toast.LENGTH_LONG);
+                //shows a message  that it  successful
+                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση",Toast.LENGTH_LONG);
                 toast.show();
             }
         });
     }
+    /**This function connects the Xml file with thw java*/
     private void Initializer()
     {
         SaleBackButton=(Button)findViewById(R.id.SaleBackButton);
@@ -65,4 +68,11 @@ public class Sale extends AppCompatActivity {
         SaleDate=(EditText)findViewById(R.id.SaleDate);
         SaleEstateNumber=(EditText)findViewById(R.id.SaleEstateNumber);
     }//endInitializer
+    private void MakeItPretty()
+    {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
+    }
 }

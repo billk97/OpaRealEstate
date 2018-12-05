@@ -28,10 +28,7 @@ public class Search extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
+        MakeItPretty();
         setContentView(R.layout.activity_search);
         final SearchControler controler = new SearchControler();
         initializer();
@@ -47,21 +44,28 @@ public class Search extends AppCompatActivity {
         SearchSelectBUtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controler.checkData(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
+
+                /**for each check box button it set a value to the controller**/
                 if(SearchFildCheckBox.isChecked())
                 {
-                    controler.setValue1("Οικόπαιδο");
+                    controler.setField("Field");
                 }
                 if(SearchFlatCheckBox.isChecked())
                 {
-                    controler.setValue2("Διαμέρισμα");
+                    controler.setFlat("Flat");
                 }
                 if(SearchBuildingCheckBox.isChecked())
                 {
-                    controler.setValue3("Κτίριο");
+                    controler.setBuilding("building");
                 }
+                /**object type controller
+                 * check data checks if the given data are correct
+                 * **/
+                controler.checkData(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
+                //shows a message that alla is going well  and its searching
                 Toast toast = Toast.makeText(getApplicationContext(),"Αναζήτηση",Toast.LENGTH_SHORT);
                 toast.show();
+                //changes the activity
                 Intent intent= new Intent(getApplicationContext(),ListView.class);
                 startActivityForResult(intent,0);
             }
@@ -69,6 +73,7 @@ public class Search extends AppCompatActivity {
 
 
     }
+    /**This function connects the Xml file with thw java*/
     private void initializer()
     {
         SearchBackButton=(Button)findViewById(R.id.SearchBackButton);
@@ -79,5 +84,12 @@ public class Search extends AppCompatActivity {
         SearchFildCheckBox=(CheckBox)findViewById(R.id.SearchFildCheckBox);
         SearchFlatCheckBox=(CheckBox)findViewById(R.id.SearchFlatCheckBox);
         SearchBuildingCheckBox=(CheckBox)findViewById(R.id.SearchBuildingCheckBox);
+    }
+    private void MakeItPretty()
+    {
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.opa));
     }
 }
