@@ -16,6 +16,7 @@ import com.example.pcbill.oparealestate.R;
 public class Search extends AppCompatActivity {
     private Button SearchBackButton;
     private Button SearchSelectBUtton;
+    //todo change same textviews to Autocomplite
     private TextView SearchTexView;
     private EditText SearchCity;
     private EditText SearchRoomNumber;

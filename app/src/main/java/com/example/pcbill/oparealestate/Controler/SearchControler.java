@@ -65,6 +65,7 @@ public class SearchControler {
 
 
     }
+    //todo filter empty input
     /**this function checks for any actual malicious threat**/
     private String CheckInput(String Input)
     {
@@ -93,6 +94,22 @@ public class SearchControler {
         int count=0;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
+        //todo insert legit data and do it in a function
+        dbHelper.Insert("Flat","athens","Smolika","35","10443","1.1.1997","3");
+        dbHelper.Insert("Flat","athens","derigni","22","10453","1.1.2000","2");
+        dbHelper.Insert("Flat","athens","kodriktonos","22","10453","1.1.2010","4");
+        dbHelper.Insert("Flat","patra","Smolika","35","10443","1.1.1997","3");
+        dbHelper.Insert("Flat","patra","derigni","22","10453","1.1.2000","2");
+        dbHelper.Insert("Flat","patra","kodriktonos","22","10453","1.1.2010","4");
+        dbHelper.Insert("Field","patra","kodriktonos","22","10453","1.1.2010","0");
+        dbHelper.Insert("Field","patra","derigni","22","10453","1.1.2010","0");
+        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
+        dbHelper.Insert("Field","athens","kodriktonos","22","10453","1.1.2010","0");
+        dbHelper.Insert("Field","athens","derigni","22","10453","1.1.2010","0");
+        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
+        dbHelper.Insert("building","athens","kodriktonos","22","10453","1.1.2010","20");
+        dbHelper.Insert("building","athens","derigni","22","10453","1.1.2010","30");
+        dbHelper.Insert("building","athens","Smolika","22","10453","1.1.2010","20");
         Cursor cursor = dbHelper.SelectAll();
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();

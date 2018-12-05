@@ -26,6 +26,7 @@ public class SaleControler {
         dbHelper.Insert(Type, City,  StreetNumber,  StreetName,  PostNumber,  Date,  RoomNuber);
     }
     /**this function checks for any actual malicious threat**/
+    //todo filter empty input
     private String CheckInput(String Input)
     {
         /**it replaces every other character other than letter and numbers **/
