@@ -116,7 +116,7 @@ public class SearchControler {
         int count=0;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
-        Cursor cursor = dbHelper.Select(city,roomNumber,"Flat","Fild","Building");
+        Cursor cursor = dbHelper.Select(city,roomNumber,"Flat","Field","building");
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
         }
@@ -164,6 +164,7 @@ public class SearchControler {
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
         }
+
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
              * insert to the array list Selected data the result of the query **/
@@ -174,7 +175,7 @@ public class SearchControler {
                     cursor.getString(5) +" - "+//gets its column tk
                     cursor.getString(6) +" - "+//gets its column date
                     cursor.getString(7) );     //gets its column arDom
-            System.out.println("bill"+SelecedData.get(count));
+            System.err.println( "bill"+SelecedData.get(count));
             count++;
         }
     }//endSelect1

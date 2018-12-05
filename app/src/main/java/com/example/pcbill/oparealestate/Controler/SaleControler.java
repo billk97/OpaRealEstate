@@ -21,7 +21,6 @@ public class SaleControler {
         PostNumber=CheckInput(PostNumber);
         Date=CheckInput(Date);
         RoomNuber=CheckInput(RoomNuber);
-        //creation of dbhelper object()
         DBHelper dbHelper = new DBHelper(context);//context is something that android needs to get the current state
         /**the actual insert**/
         dbHelper.Insert(Type, City,  StreetNumber,  StreetName,  PostNumber,  Date,  RoomNuber);

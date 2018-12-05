@@ -46,6 +46,7 @@ public class  ListView extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent= new Intent(getApplicationContext(),Search.class);
                 startActivityForResult(intent,0);
+                arrayAdapter.clear();
                 finish();
             }
         });

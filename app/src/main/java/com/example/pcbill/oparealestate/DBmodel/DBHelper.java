@@ -91,9 +91,9 @@ public class DBHelper extends SQLiteOpenHelper
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'" + city +"'" +
                 " AND " + ROOMS + " = " +"'" + roomNumber +"'" +
-                " AND " + TYPE + " = " + "'" +value1 +"'" +
+                " AND " +"(" + TYPE + " = " + "'" +value1 +"'" +
                 " OR " + TYPE + " = " + "'" +value2 +"'" +
-                " OR " + TYPE + " = " + "'" +value3 +"'" ;
+                " OR " + TYPE + " = " + "'" +value3 +"'" +")";
         return sqLiteDatabase.rawQuery(sql,null);
     }
     /**Selects the designated data from the table / database **/
@@ -102,8 +102,8 @@ public class DBHelper extends SQLiteOpenHelper
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = "  + "'" + city + "'" +
                 " AND " + ROOMS + " = " + "'" + roomNumber + "'" +
-                " AND " + TYPE + " = " + "'" + value1 +"'" +
-                " OR " + TYPE + " = " + "'" + value2 +"'" ;
+                " AND " +"("+ TYPE + " = " + "'" + value1 +"'" +
+                " OR " + TYPE + " = " + "'" + value2 +"'"+")" ;
         return sqLiteDatabase.rawQuery(sql,null);
     }
 
