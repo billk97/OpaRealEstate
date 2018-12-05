@@ -52,6 +52,8 @@ public class DBHelper extends SQLiteOpenHelper
                     ROOMS+" TEXT )";
             // executes the query
             sqLiteDatabase.execSQL(sql);
+            Insert("Flat","athens","Smolika","35","10443","1.1.1997","3");
+        Insert("Flat","athens","derigni","22","10453","1.1.2000","2");
 
 
     }
