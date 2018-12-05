@@ -3,6 +3,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,13 +17,22 @@ public class Sale extends AppCompatActivity {
     private Button SaleBackButton;
     private Button SaleInsertButton;
     private TextView SaleTextView;
-    private EditText SaleType;
-    private EditText SaleCity;
-    private EditText SaleStreetName;
+    private AutoCompleteTextView SaleType;
+    private AutoCompleteTextView SaleCity;
+    private AutoCompleteTextView SaleStreetName;
     private EditText SaleStreetNumber;
     private EditText SalePostNumber;
     private EditText SaleDate;
     private EditText SaleEstateNumber;
+    private static final String[] Types = new String[] {
+            "building", "Flat", "Field"
+    };
+    private static final String[] CityList = new String[] {
+            "athens", "thesaloniki", "patra","Larisa","Hraklio"
+    };
+    private static final String[] AddressList = new String[] {
+            "Smolika", "Patision", "Derigni","Antoniadou","Kodriktonos"
+    };
     /**creates an object SaleControler to communicate with the controller **/
     private SaleControler saleControler = new SaleControler();
 
@@ -60,13 +71,21 @@ public class Sale extends AppCompatActivity {
         SaleBackButton=(Button)findViewById(R.id.SaleBackButton);
         SaleInsertButton=(Button)findViewById(R.id.SaleInsertButton);
         SaleTextView=(TextView) findViewById(R.id.SaleTextView);
-        SaleType=(EditText)findViewById(R.id.SaleType);
-        SaleCity=(EditText)findViewById(R.id.SaleCity);
-        SaleStreetName=(EditText)findViewById(R.id.SaleStreetName);
+       // SaleCity=(EditText)findViewById(R.id.SaleCity);
+        //SaleStreetName=(EditText)findViewById(R.id.SaleStreetName);
         SaleStreetNumber=(EditText)findViewById(R.id.SaleStreetNumber);
         SalePostNumber=(EditText)findViewById(R.id.SalePostNumber);
         SaleDate=(EditText)findViewById(R.id.SaleDate);
         SaleEstateNumber=(EditText)findViewById(R.id.SaleEstateNumber);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,Types);
+        SaleType = (AutoCompleteTextView)findViewById(R.id.SaleType);
+        SaleType.setAdapter(adapter);
+        ArrayAdapter<String> adapte2 = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,CityList);
+        SaleCity = (AutoCompleteTextView)findViewById(R.id.SaleCity);
+        SaleCity.setAdapter(adapte2);
+        ArrayAdapter<String> adapte3 = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,AddressList);
+        SaleStreetName= (AutoCompleteTextView)findViewById(R.id.SaleStreetName);
+        SaleStreetName.setAdapter(adapte3);
     }//endInitializer
     private void MakeItPretty()
     {

@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/SaleType"
         android:layout_width="326dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SaleTextView" />
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/SaleCity"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SaleType" />
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/SaleStreetName"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
@@ -141,8 +141,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SaleEstateNumber" />
-
-
 
 
 </android.support.constraint.ConstraintLayout>
