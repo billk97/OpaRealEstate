@@ -63,6 +63,16 @@ public class SearchControler {
         }
 
     }
+    public  boolean CheckIsEmpty(Context context, String City, String RoomNuber)
+    {
+        if( City.isEmpty()|| RoomNuber.isEmpty())
+        {
+            Toast toast = Toast.makeText(context,"All fields  must be filled ",Toast.LENGTH_SHORT);
+            toast.show();
+            return true;
+        }
+        return false;
+    }
 
     //todo filter empty input
     /**this function checks for any actual malicious threat**/

@@ -68,13 +68,16 @@ public class Search extends AppCompatActivity {
                 /**object type controller
                  * check data checks if the given data are correct
                  * **/
-                controler.checkData(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
-                //shows a message that alla is going well  and its searching
-                Toast toast = Toast.makeText(getApplicationContext(),"Searching",Toast.LENGTH_SHORT);
-                toast.show();
-                //changes the activity
-                Intent intent= new Intent(getApplicationContext(),ListView.class);
-                startActivityForResult(intent,0);
+                if(controler.CheckIsEmpty(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString())==false)
+                {
+                    controler.checkData(getApplicationContext(), SearchCity.getText().toString(),SearchRoomNumber.getText().toString());
+                    //shows a message that alla is going well  and its searching
+                    Toast toast = Toast.makeText(getApplicationContext(),"Searching",Toast.LENGTH_SHORT);
+                    toast.show();
+                    //changes the activity
+                    Intent intent= new Intent(getApplicationContext(),ListView.class);
+                    startActivityForResult(intent,0);
+                }
             }
         });
 
