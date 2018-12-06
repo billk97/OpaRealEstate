@@ -102,6 +102,8 @@ public class DBHelper extends SQLiteOpenHelper
                 " AND " +"("+ TYPE + " = " + "'" + value1 +"'" +
                 " OR " + TYPE + " = " + "'" + value2 +"'"+")" ;
         return sqLiteDatabase.rawQuery(sql,null);
+
+        
     }
 
     public Cursor Select(String city, String roomNumber, String value1)

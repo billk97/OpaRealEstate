@@ -6,8 +6,6 @@ import android.widget.Toast;
 
 import com.example.pcbill.oparealestate.DBmodel.DBHelper;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -18,7 +16,7 @@ public class SearchControler {
     private String Fild ="0";
     private String Flat ="0";
     private String Building ="0";
-    private static ArrayList<String> SelecedData = new ArrayList<String>();
+    public static ArrayList<String> SelecedData = new ArrayList<String>();
     private static ArrayList<String> Test = new ArrayList<String>();
     /**When this function is called
      * it checks the variables that has received for
@@ -86,31 +84,42 @@ public class SearchControler {
         Building = value3;
     }
 
-    public static ArrayList<String> getSelecedData() {
+    public  ArrayList<String> getSelecedData() {
+
         return SelecedData;
     }
+
+    public static ArrayList<String> getTest() {
+        return Test;
+    }
+
+    public static void setTest(ArrayList<String> test) {
+        Test = test;
+    }
+
     private void SelectAll(Context context)
     {
         int count=0;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
         //todo insert legit data and do it in a function
-        dbHelper.Insert("Flat","athens","Smolika","35","10443","1.1.1997","3");
-        dbHelper.Insert("Flat","athens","derigni","22","10453","1.1.2000","2");
-        dbHelper.Insert("Flat","athens","kodriktonos","22","10453","1.1.2010","4");
-        dbHelper.Insert("Flat","patra","Smolika","35","10443","1.1.1997","3");
-        dbHelper.Insert("Flat","patra","derigni","22","10453","1.1.2000","2");
-        dbHelper.Insert("Flat","patra","kodriktonos","22","10453","1.1.2010","4");
-        dbHelper.Insert("Field","patra","kodriktonos","22","10453","1.1.2010","0");
-        dbHelper.Insert("Field","patra","derigni","22","10453","1.1.2010","0");
-        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
-        dbHelper.Insert("Field","athens","kodriktonos","22","10453","1.1.2010","0");
-        dbHelper.Insert("Field","athens","derigni","22","10453","1.1.2010","0");
-        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
-        dbHelper.Insert("building","athens","kodriktonos","22","10453","1.1.2010","20");
-        dbHelper.Insert("building","athens","derigni","22","10453","1.1.2010","30");
-        dbHelper.Insert("building","athens","Smolika","22","10453","1.1.2010","20");
+//        dbHelper.Insert("Flat","athens","Smolika","35","10443","1.1.1997","3");
+//        dbHelper.Insert("Flat","athens","derigni","22","10453","1.1.2000","2");
+//        dbHelper.Insert("Flat","athens","kodriktonos","22","10453","1.1.2010","4");
+//        dbHelper.Insert("Flat","patra","Smolika","35","10443","1.1.1997","3");
+//        dbHelper.Insert("Flat","patra","derigni","22","10453","1.1.2000","2");
+//        dbHelper.Insert("Flat","patra","kodriktonos","22","10453","1.1.2010","4");
+//        dbHelper.Insert("Field","patra","kodriktonos","22","10453","1.1.2010","0");
+//        dbHelper.Insert("Field","patra","derigni","22","10453","1.1.2010","0");
+//        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
+//        dbHelper.Insert("Field","athens","kodriktonos","22","10453","1.1.2010","0");
+//        dbHelper.Insert("Field","athens","derigni","22","10453","1.1.2010","0");
+//        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
+//        dbHelper.Insert("building","athens","kodriktonos","22","10453","1.1.2010","20");
+//        dbHelper.Insert("building","athens","derigni","22","10453","1.1.2010","30");
+//        dbHelper.Insert("building","athens","Smolika","22","10453","1.1.2010","20");
         Cursor cursor = dbHelper.SelectAll();
+
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
         }
@@ -124,7 +133,7 @@ public class SearchControler {
                     cursor.getString(5) +" - "+//gets its column tk
                     cursor.getString(6) +" - "+//gets its column date
                     cursor.getString(7) );     //gets its column arDom
-            System.out.println(Test.get(count));
+            System.err.println("select all: " + Test.get(count));
             count++;
         }
     }//endSelect3
@@ -147,6 +156,7 @@ public class SearchControler {
                     cursor.getString(5) +" - "+//gets its column tk
                     cursor.getString(6) +" - "+//gets its column date
                     cursor.getString(7) );     //gets its column arDom
+            System.err.println("select 3: "+SelecedData.get(count));
             count++;
         }
     }//endSelect3
@@ -170,18 +180,28 @@ public class SearchControler {
                     cursor.getString(6) +" - "+//gets its column date
                     cursor.getString(7) );     //gets its column arDom
             count++;
+            System.err.println("select 2: "+ SelecedData.get(count));
         }
     }//endSelect2
     private void Select1(Context context, String city,String roomNumber, String value )
     {
-        int count=0;
+        System.out.println(" city: "+ city);
+        System.out.println(" roomNumber: "+ roomNumber);
+        System.out.println(" value: "+ value);
+        int count=1;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,value);
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
         }
-
+        SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                cursor.getString(2) +" - "+//gets its column City
+                cursor.getString(3) +" - "+//gets its column Address
+                cursor.getString(4) +" - "+//gets its column Number
+                cursor.getString(5) +" - "+//gets its column tk
+                cursor.getString(6) +" - "+//gets its column date
+                cursor.getString(7) );     //gets its column arDom
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
              * insert to the array list Selected data the result of the query **/
@@ -192,7 +212,7 @@ public class SearchControler {
                     cursor.getString(5) +" - "+//gets its column tk
                     cursor.getString(6) +" - "+//gets its column date
                     cursor.getString(7) );     //gets its column arDom
-            System.err.println( "bill"+SelecedData.get(count));
+            System.err.println( "select 1: "+SelecedData.get(count));
             count++;
         }
     }//endSelect1
