@@ -116,8 +116,8 @@ public class DBHelper extends SQLiteOpenHelper
                 " AND " + ROOMS + " = " + "'" + roomNumber +"'"  +
                 " AND " + TYPE + " = " + "'" + value1+"'"  ;
         String sql2 = "SELECT * FROM " + " building " + " WHERE " + CITY + " = "+ "'kefalonia'";
-        System.out.println("database: "+sqLiteDatabase.rawQuery(sql2,null).toString());
-        return sqLiteDatabase.rawQuery(sql2,null);
+        System.out.println("database: "+sqLiteDatabase.rawQuery(sql,null).toString());
+        return sqLiteDatabase.rawQuery(sql,null);
     }
 
 }//end DBHelper

@@ -28,7 +28,7 @@ public class Sale extends AppCompatActivity {
             "building", "Flat", "Field"
     };
     private static final String[] CityList = new String[] {
-            "athens", "thesaloniki", "patra","Larisa","Hraklio"
+            "Athens", "Thesaloniki", "Patra","Larisa","Hraklio"
     };
     private static final String[] AddressList = new String[] {
             "Smolika", "Patision", "Derigni","Antoniadou","Kodriktonos"
@@ -60,7 +60,7 @@ public class Sale extends AppCompatActivity {
                         SaleStreetName.getText().toString(),SaleStreetNumber.getText().toString(),SalePostNumber.getText().toString(),
                         SaleDate.getText().toString(),SaleEstateNumber.getText().toString());
                 //shows a message  that it  successful
-                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχήςς καταχώρηση",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχής καταχώρηση",Toast.LENGTH_LONG);
                 toast.show();
             }
         });
@@ -71,8 +71,6 @@ public class Sale extends AppCompatActivity {
         SaleBackButton=(Button)findViewById(R.id.SaleBackButton);
         SaleInsertButton=(Button)findViewById(R.id.SaleInsertButton);
         SaleTextView=(TextView) findViewById(R.id.SaleTextView);
-       // SaleCity=(EditText)findViewById(R.id.SaleCity);
-        //SaleStreetName=(EditText)findViewById(R.id.SaleStreetName);
         SaleStreetNumber=(EditText)findViewById(R.id.SaleStreetNumber);
         SalePostNumber=(EditText)findViewById(R.id.SalePostNumber);
         SaleDate=(EditText)findViewById(R.id.SaleDate);

@@ -27,6 +27,7 @@ public class SearchControler {
     {
         city=CheckInput(city);
         roomNumber=CheckInput(roomNumber);
+        initializeData(context);
         SelectAll(context);
         if(!Fild.equals("0")&&!Flat.equals("0")&&!Building.equals("0"))
         {
@@ -61,8 +62,8 @@ public class SearchControler {
             Select3(context,city,roomNumber);
         }
 
-
     }
+
     //todo filter empty input
     /**this function checks for any actual malicious threat**/
     private String CheckInput(String Input)
@@ -103,21 +104,6 @@ public class SearchControler {
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
         //todo insert legit data and do it in a function
-//        dbHelper.Insert("Flat","athens","Smolika","35","10443","1.1.1997","3");
-//        dbHelper.Insert("Flat","athens","derigni","22","10453","1.1.2000","2");
-//        dbHelper.Insert("Flat","athens","kodriktonos","22","10453","1.1.2010","4");
-//        dbHelper.Insert("Flat","patra","Smolika","35","10443","1.1.1997","3");
-//        dbHelper.Insert("Flat","patra","derigni","22","10453","1.1.2000","2");
-//        dbHelper.Insert("Flat","patra","kodriktonos","22","10453","1.1.2010","4");
-//        dbHelper.Insert("Field","patra","kodriktonos","22","10453","1.1.2010","0");
-//        dbHelper.Insert("Field","patra","derigni","22","10453","1.1.2010","0");
-//        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
-//        dbHelper.Insert("Field","athens","kodriktonos","22","10453","1.1.2010","0");
-//        dbHelper.Insert("Field","athens","derigni","22","10453","1.1.2010","0");
-//        dbHelper.Insert("Field","athens","Smolika","22","10453","1.1.2010","0");
-//        dbHelper.Insert("building","athens","kodriktonos","22","10453","1.1.2010","20");
-//        dbHelper.Insert("building","athens","derigni","22","10453","1.1.2010","30");
-//        dbHelper.Insert("building","athens","Smolika","22","10453","1.1.2010","20");
         Cursor cursor = dbHelper.SelectAll();
 
         if(!cursor.moveToNext()){//checks if the is any other row left
@@ -139,12 +125,22 @@ public class SearchControler {
     }//endSelect3
     private void Select3(Context context, String city,String roomNumber)
     {
-        int count=0;
+        int count=1;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,"Flat","Field","building");
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+        }
+        if(cursor.isFirst())
+        {
+            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                    cursor.getString(2) +" - "+//gets its column City
+                    cursor.getString(3) +" - "+//gets its column Address
+                    cursor.getString(4) +" - "+//gets its column Number
+                    cursor.getString(5) +" - "+//gets its column tk
+                    cursor.getString(6) +" - "+//gets its column date
+                    cursor.getString(7) );     //gets its column arDom
         }
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
@@ -162,12 +158,22 @@ public class SearchControler {
     }//endSelect3
     private void Select2(Context context, String city,String roomNumber, String value1,String value2)
     {
-        int count=0;
+        int count=1;
         DBHelper dbHelper = new DBHelper(context);
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,value1,value2);
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+        }
+        if(cursor.isFirst())
+        {
+            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                    cursor.getString(2) +" - "+//gets its column City
+                    cursor.getString(3) +" - "+//gets its column Address
+                    cursor.getString(4) +" - "+//gets its column Number
+                    cursor.getString(5) +" - "+//gets its column tk
+                    cursor.getString(6) +" - "+//gets its column date
+                    cursor.getString(7) );     //gets its column arDom
         }
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
@@ -195,13 +201,17 @@ public class SearchControler {
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
         }
-        SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
-                cursor.getString(2) +" - "+//gets its column City
-                cursor.getString(3) +" - "+//gets its column Address
-                cursor.getString(4) +" - "+//gets its column Number
-                cursor.getString(5) +" - "+//gets its column tk
-                cursor.getString(6) +" - "+//gets its column date
-                cursor.getString(7) );     //gets its column arDom
+        if(cursor.isFirst())
+        {
+            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                    cursor.getString(2) +" - "+//gets its column City
+                    cursor.getString(3) +" - "+//gets its column Address
+                    cursor.getString(4) +" - "+//gets its column Number
+                    cursor.getString(5) +" - "+//gets its column tk
+                    cursor.getString(6) +" - "+//gets its column date
+                    cursor.getString(7) );     //gets its column arDom
+        }
+
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
              * insert to the array list Selected data the result of the query **/
@@ -216,4 +226,116 @@ public class SearchControler {
             count++;
         }
     }//endSelect1
+    private void initializeData(Context context)
+    {
+        if (SelecedData.isEmpty())
+        {
+            DBHelper dbHelper = new DBHelper(context);
+            /**its an interface which represents a 2 dimensional table of any database **/
+            //todo insert legit data and do it in a function
+            Cursor cursor = dbHelper.SelectAll();
+            dbHelper.Insert("Flat","Athens","Lenorman","200","10443","2000","2");
+            dbHelper.Insert("Flat","Athens","Vouliagmenis","200","10431","2000","2");
+            dbHelper.Insert("Flat","Athens","Patision","200","10441","2000","2");
+            dbHelper.Insert("Flat","Athens","Iera Odos","200","10432","2000","2");
+            dbHelper.Insert("Flat","Athens","Konstantinoypolaios","200","10456","2000","2");
+            dbHelper.Insert("Flat","Athens","Sygrou","200","10434","2000","2");
+            dbHelper.Insert("Flat","Athens","Ermoy","200","10437","2000","3");
+            dbHelper.Insert("Flat","Athens","Panepistimiou","200","10438","2000","3");
+            dbHelper.Insert("Flat","Athens","Peireos","200","10439","2000","3");
+            dbHelper.Insert("Flat","Athens","Benaki","200","10433","2000","3");
+            dbHelper.Insert("Flat","Thesaloniki","Lenorman","200","10443","2001","2");
+            dbHelper.Insert("Flat","Thesaloniki","Vouliagmenis","200","10431","2001","2");
+            dbHelper.Insert("Flat","Thesaloniki","Patision","200","10441","2001","2");
+            dbHelper.Insert("Flat","Thesaloniki","Iera Odos","200","10432","2001","2");
+            dbHelper.Insert("Flat","Thesaloniki","Konstantinoypolaios","2001","10456","2000","2");
+            dbHelper.Insert("Flat","Thesaloniki","Sygrou","200","10434","2001","2");
+            dbHelper.Insert("Flat","Thesaloniki","Ermoy","200","10437","2001","3");
+            dbHelper.Insert("Flat","Thesaloniki","Panepistimiou","200","10438","2001","3");
+            dbHelper.Insert("Flat","Thesaloniki","Peireos","200","10439","2001","3");
+            dbHelper.Insert("Flat","Thesaloniki","Benaki","200","10433","2001","3");
+            dbHelper.Insert("Field","Thesaloniki","Lenorman","200","10443","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Vouliagmenis","200","10431","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Patision","200","10441","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Iera Odos","200","10432","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Konstantinoypolaios","2001","10456","2000","0");
+            dbHelper.Insert("Field","Thesaloniki","Sygrou","200","10434","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Ermoy","200","10437","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Panepistimiou","200","10438","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Peireos","200","10439","2001","0");
+            dbHelper.Insert("Field","Thesaloniki","Benaki","200","10433","2001","0");
+            dbHelper.Insert("building","Thesaloniki","Lenorman","200","10443","2001","15");
+            dbHelper.Insert("building","Thesaloniki","Vouliagmenis","200","10431","2001","15");
+            dbHelper.Insert("building","Thesaloniki","Patision","200","10441","2001","15");
+            dbHelper.Insert("building","Thesaloniki","Iera Odos","200","10432","2001","15");
+            dbHelper.Insert("building","Thesaloniki","Konstantinoypolaios","2001","10456","2000","7");
+            dbHelper.Insert("building","Thesaloniki","Sygrou","200","10434","2001","17");
+            dbHelper.Insert("building","Thesaloniki","Ermoy","200","10437","2001","18");
+            dbHelper.Insert("building","Thesaloniki","Panepistimiou","200","10438","2001","10");
+            dbHelper.Insert("building","Thesaloniki","Peireos","200","10439","2001","19");
+            dbHelper.Insert("building","Thesaloniki","Benaki","200","10433","2001","10");
+            dbHelper.Insert("building","Athens","Lenorman","200","10443","2000","16");
+            dbHelper.Insert("building","Athens","Vouliagmenis","200","10431","2000","14");
+            dbHelper.Insert("building","Athens","Patision","200","10441","2000","16");
+            dbHelper.Insert("building","Athens","Iera Odos","200","10432","2000","16");
+            dbHelper.Insert("building","Athens","Konstantinoypolaios","200","10456","2000","15");
+            dbHelper.Insert("building","Athens","Sygrou","200","10434","2000","14");
+            dbHelper.Insert("building","Athens","Ermoy","200","10437","2000","13");
+            dbHelper.Insert("building","Athens","Panepistimiou","200","10438","2000","12");
+            dbHelper.Insert("building","Athens","Peireos","200","10439","2000","12");
+            dbHelper.Insert("building","Athens","Benaki","200","10433","2000","11");
+            dbHelper.Insert("Flat","Patra","Lenorman","200","10443","2000","2");
+            dbHelper.Insert("Flat","Patra","Vouliagmenis","200","10431","2000","2");
+            dbHelper.Insert("Flat","Patra","Patision","200","10441","2000","2");
+            dbHelper.Insert("Flat","Patra","Iera Odos","200","10432","2000","2");
+            dbHelper.Insert("Flat","Patra","Konstantinoypolaios","200","10456","2000","2");
+            dbHelper.Insert("Flat","Patra","Sygrou","200","10434","2000","2");
+            dbHelper.Insert("Flat","Patra","Ermoy","200","10437","2000","3");
+            dbHelper.Insert("Flat","Patra","Panepistimiou","200","10438","2000","3");
+            dbHelper.Insert("Flat","Patra","Peireos","200","10439","2000","3");
+            dbHelper.Insert("Flat","Patra","Benaki","200","10433","2000","3");
+            dbHelper.Insert("Flat","Kefalonia","Lenorman","200","10443","2001","2");
+            dbHelper.Insert("Flat","Kefalonia","Vouliagmenis","200","10431","2001","2");
+            dbHelper.Insert("Flat","Kefalonia","Patision","200","10441","2001","2");
+            dbHelper.Insert("Flat","Kefalonia","Iera Odos","200","10432","2001","2");
+            dbHelper.Insert("Flat","Kefalonia","Konstantinoypolaios","2001","10456","2000","2");
+            dbHelper.Insert("Flat","Kefalonia","Sygrou","200","10434","2001","2");
+            dbHelper.Insert("Flat","Kefalonia","Ermoy","200","10437","2001","3");
+            dbHelper.Insert("Flat","Kefalonia","Panepistimiou","200","10438","2001","3");
+            dbHelper.Insert("Flat","Kefalonia","Peireos","200","10439","2001","3");
+            dbHelper.Insert("Flat","Kefalonia","Benaki","200","10433","2001","3");
+            dbHelper.Insert("Field","Kefalonia","Lenorman","200","10443","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Vouliagmenis","200","10431","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Patision","200","10441","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Iera Odos","200","10432","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Konstantinoypolaios","2001","10456","2000","0");
+            dbHelper.Insert("Field","Kefalonia","Sygrou","200","10434","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Ermoy","200","10437","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Panepistimiou","200","10438","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Peireos","200","10439","2001","0");
+            dbHelper.Insert("Field","Kefalonia","Benaki","200","10433","2001","0");
+            dbHelper.Insert("building","Kefalonia","Lenorman","200","10443","2001","15");
+            dbHelper.Insert("building","Kefalonia","Vouliagmenis","200","10431","2001","15");
+            dbHelper.Insert("building","Kefalonia","Patision","200","10441","2001","15");
+            dbHelper.Insert("building","Kefalonia","Iera Odos","200","10432","2001","15");
+            dbHelper.Insert("building","Kefalonia","Konstantinoypolaios","2001","10456","2000","7");
+            dbHelper.Insert("building","Kefalonia","Sygrou","200","10434","2001","17");
+            dbHelper.Insert("building","Kefalonia","Ermoy","200","10437","2001","18");
+            dbHelper.Insert("building","Kefalonia","Panepistimiou","200","10438","2001","10");
+            dbHelper.Insert("building","Kefalonia","Peireos","200","10439","2001","19");
+            dbHelper.Insert("building","Kefalonia","Benaki","200","10433","2001","10");
+            dbHelper.Insert("building","Patra","Lenorman","200","10443","2000","16");
+            dbHelper.Insert("building","Patra","Vouliagmenis","200","10431","2000","14");
+            dbHelper.Insert("building","Patra","Patision","200","10441","2000","16");
+            dbHelper.Insert("building","Patra","Iera Odos","200","10432","2000","16");
+            dbHelper.Insert("building","Patra","Konstantinoypolaios","200","10456","2000","15");
+            dbHelper.Insert("building","Patra","Sygrou","200","10434","2000","14");
+            dbHelper.Insert("building","Patra","Ermoy","200","10437","2000","13");
+            dbHelper.Insert("building","Patra","Panepistimiou","200","10438","2000","12");
+            dbHelper.Insert("building","Patra","Peireos","200","10439","2000","12");
+            dbHelper.Insert("building","Patra","Benaki","200","10433","2000","11");
+
+
+        }
+    }
 }
