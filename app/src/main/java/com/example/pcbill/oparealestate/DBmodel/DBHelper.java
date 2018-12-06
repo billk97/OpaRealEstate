@@ -3,7 +3,6 @@ package com.example.pcbill.oparealestate.DBmodel;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -107,11 +106,16 @@ public class DBHelper extends SQLiteOpenHelper
 
     public Cursor Select(String city, String roomNumber, String value1)
     {
+        System.out.println("Dbhelper city: "+ city);
+        System.out.println("Dbhelper roomNumber: "+ roomNumber);
+        System.out.println("Dbhelper value: "+ value1);
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'"+city+"'" +
                 " AND " + ROOMS + " = " + "'" + roomNumber +"'"  +
                 " AND " + TYPE + " = " + "'" + value1+"'"  ;
-        return sqLiteDatabase.rawQuery(sql,null);
+        String sql2 = "SELECT * FROM " + " building " + " WHERE " + CITY + " = "+ "'kefalonia'";
+        System.out.println("database: "+sqLiteDatabase.rawQuery(sql2,null).toString());
+        return sqLiteDatabase.rawQuery(sql2,null);
     }
 
 }//end DBHelper
