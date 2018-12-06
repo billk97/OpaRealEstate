@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif"
-        android:text="Καταχώρηση Κατοικίας"
+        android:text="Home registration"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
