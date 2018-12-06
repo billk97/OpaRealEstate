@@ -2,6 +2,7 @@ package com.example.pcbill.oparealestate.Controler;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.example.pcbill.oparealestate.DBmodel.DBHelper;
 
@@ -27,6 +28,16 @@ public class SaleControler {
     }
     /**this function checks for any actual malicious threat**/
     //todo filter empty input
+    public  boolean CheckIsEmpty(Context context,String Type, String City, String StreetNumber, String StreetName, String PostNumber, String Date, String RoomNuber)
+    {
+        if(Type.isEmpty() || City.isEmpty()|| StreetNumber.isEmpty()||StreetName.isEmpty()||PostNumber.isEmpty()|| Date.isEmpty()|| RoomNuber.isEmpty())
+        {
+            Toast toast = Toast.makeText(context,"All fields  must be filled ",Toast.LENGTH_SHORT);
+            toast.show();
+            return true;
+        }
+        return false;
+    }
     private String CheckInput(String Input)
     {
         /**it replaces every other character other than letter and numbers **/

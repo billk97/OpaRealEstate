@@ -107,7 +107,7 @@ public class SearchControler {
         Cursor cursor = dbHelper.SelectAll();
 
         if(!cursor.moveToNext()){//checks if the is any other row left
-            Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "NO such building ", Toast.LENGTH_SHORT).show();
         }
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
