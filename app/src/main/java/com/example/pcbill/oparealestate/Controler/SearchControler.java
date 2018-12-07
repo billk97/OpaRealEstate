@@ -238,9 +238,11 @@ public class SearchControler {
     }//endSelect1
     private void initializeData(Context context)
     {
-        if (SelecedData.isEmpty())
+        DBHelper dbHelper = new DBHelper(context);
+
+        if (dbHelper.DbIsempty()==true)
         {
-            DBHelper dbHelper = new DBHelper(context);
+
             /**its an interface which represents a 2 dimensional table of any database **/
             //todo insert legit data and do it in a function
             Cursor cursor = dbHelper.SelectAll();
@@ -344,7 +346,6 @@ public class SearchControler {
             dbHelper.Insert("building","Patra","Panepistimiou","200","10438","2000","12");
             dbHelper.Insert("building","Patra","Peireos","200","10439","2000","12");
             dbHelper.Insert("building","Patra","Benaki","200","10433","2000","11");
-
 
         }
     }

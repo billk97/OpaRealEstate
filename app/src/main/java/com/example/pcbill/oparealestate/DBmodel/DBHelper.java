@@ -75,6 +75,21 @@ public class DBHelper extends SQLiteOpenHelper
                 return true;
          }
     }
+    public  boolean DbIsempty()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String count = "SELECT count(*) FROM building";
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount>0)
+        {
+            return false;
+        }
+        return true;
+
+
+    }
     /**Selects all the data from the table**/
     public  Cursor SelectAll()
     {
