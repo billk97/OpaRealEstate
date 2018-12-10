@@ -16,8 +16,18 @@ public class SearchControler {
     private String Fild ="0";
     private String Flat ="0";
     private String Building ="0";
+    private Boolean Empty = false;
     public static ArrayList<String> SelecedData = new ArrayList<String>();
     private static ArrayList<String> Test = new ArrayList<String>();
+
+    public Boolean getEmpty() {
+        return Empty;
+    }
+
+    public void setEmpty(Boolean empty) {
+        Empty = empty;
+    }
+
     /**When this function is called
      * it checks the variables that has received for
      * Eny type of non wanted activity
@@ -28,18 +38,21 @@ public class SearchControler {
         city=CheckInput(city);
         roomNumber=CheckInput(roomNumber);
         initializeData(context);
-        SelectAll(context);
+       // SelectAll(context);
         if(!Fild.equals("0")&&!Flat.equals("0")&&!Building.equals("0"))
         {
             Select3(context,city,roomNumber);
         }
+
         else if(!Fild.equals("0")&&!Flat.equals("0")&&Building.equals("0"))
         {
-            Select2(context,city,roomNumber,Fild,Flat);
+            Select2(context,city,roomNumber,"Field","Flat");
+            System.out.println("1");
         }
         else if (!Fild.equals("0")&&Flat.equals("0")&&!Building.equals("0"))
         {
-            Select2(context,city,roomNumber,Fild,Building);
+            Select2(context,city,roomNumber,"Field","building");
+            System.out.println("2");
         }
         else if (!Fild.equals("0")&&Flat.equals("0")&&Building.equals("0"))
         {
@@ -47,7 +60,8 @@ public class SearchControler {
         }
         else if (Fild.equals("0")&&!Flat.equals("0")&&!Building.equals("0"))
         {
-            Select2(context,city,roomNumber,Flat,Building);
+            Select2(context,city,roomNumber,"Flat","building");
+            System.out.println("3");
         }
         else if (Fild.equals("0")&&!Flat.equals("0")&&Building.equals("0"))
         {
@@ -118,6 +132,7 @@ public class SearchControler {
 
         if(!cursor.moveToNext()){//checks if the is any other row left
             Toast.makeText(context, "NO such building ", Toast.LENGTH_SHORT).show();
+            setEmpty(true);
         }
         while(cursor.moveToNext()){//goes to the next column
             /**the actual insert
@@ -140,30 +155,34 @@ public class SearchControler {
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,"Flat","Field","building");
         if(!cursor.moveToNext()){//checks if the is any other row left
-            Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "NO such building3 ", Toast.LENGTH_SHORT).show();
+            setEmpty(true);
         }
-        if(cursor.isFirst())
+        else
         {
-            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
-        }
-        while(cursor.moveToNext()){//goes to the next column
-            /**the actual insert
-             * insert to the array list Selected data the result of the query **/
-            SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
-            System.err.println("select 3: "+SelecedData.get(count));
-            count++;
+            if(cursor.isFirst())
+            {
+                SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+            }
+            while(cursor.moveToNext()){//goes to the next column
+                /**the actual insert
+                 * insert to the array list Selected data the result of the query **/
+                SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+                System.err.println("select 3: "+SelecedData.get(count));
+                count++;
+            }
         }
     }//endSelect3
     private void Select2(Context context, String city,String roomNumber, String value1,String value2)
@@ -173,31 +192,38 @@ public class SearchControler {
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,value1,value2);
         if(!cursor.moveToNext()){//checks if the is any other row left
-            Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "NO such building2", Toast.LENGTH_SHORT).show();
+            setEmpty(true);
         }
-        if(cursor.isFirst())
+        else
         {
-            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
+            if(cursor.isFirst())
+            {
+                SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+                System.err.println("select 2: "+ SelecedData.get(0));
+            }
+            while(cursor.moveToNext()){//goes to the next column
+                /**the actual insert
+                 * insert to the array list Selected data the result of the query **/
+                SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+                System.err.println("select 2: "+ SelecedData.get(count));
+                count++;
+
+            }
         }
-        while(cursor.moveToNext()){//goes to the next column
-            /**the actual insert
-             * insert to the array list Selected data the result of the query **/
-            SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
-            count++;
-            System.err.println("select 2: "+ SelecedData.get(count));
-        }
+
     }//endSelect2
     private void Select1(Context context, String city,String roomNumber, String value )
     {
@@ -209,32 +235,37 @@ public class SearchControler {
         /**its an interface which represents a 2 dimensional table of any database **/
         Cursor cursor = dbHelper.Select(city,roomNumber,value);
         if(!cursor.moveToNext()){//checks if the is any other row left
-            Toast.makeText(context, "There are no contacts to show", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "NO such building1", Toast.LENGTH_SHORT).show();
+            setEmpty(true);
         }
-        if(cursor.isFirst())
+        else
         {
-            SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
+            if(cursor.isFirst())
+            {
+                SelecedData.add(0,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+            }
+
+            while(cursor.moveToNext()){//goes to the next column
+                /**the actual insert
+                 * insert to the array list Selected data the result of the query **/
+                SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
+                        cursor.getString(2) +" - "+//gets its column City
+                        cursor.getString(3) +" - "+//gets its column Address
+                        cursor.getString(4) +" - "+//gets its column Number
+                        cursor.getString(5) +" - "+//gets its column tk
+                        cursor.getString(6) +" - "+//gets its column date
+                        cursor.getString(7) );     //gets its column arDom
+                System.err.println( "select 1: "+SelecedData.get(count));
+                count++;
+            }
         }
 
-        while(cursor.moveToNext()){//goes to the next column
-            /**the actual insert
-             * insert to the array list Selected data the result of the query **/
-            SelecedData.add(count,cursor.getString(1) +" - "+ //gets its column Type
-                    cursor.getString(2) +" - "+//gets its column City
-                    cursor.getString(3) +" - "+//gets its column Address
-                    cursor.getString(4) +" - "+//gets its column Number
-                    cursor.getString(5) +" - "+//gets its column tk
-                    cursor.getString(6) +" - "+//gets its column date
-                    cursor.getString(7) );     //gets its column arDom
-            System.err.println( "select 1: "+SelecedData.get(count));
-            count++;
-        }
     }//endSelect1
     private void initializeData(Context context)
     {

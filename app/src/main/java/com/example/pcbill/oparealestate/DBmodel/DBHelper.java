@@ -100,23 +100,37 @@ public class DBHelper extends SQLiteOpenHelper
     /**Selects the designated data from the table / database **/
     public Cursor Select(String city, String roomNumber, String value1, String value2, String value3)
     {
+        System.out.println("roomNumber "+ roomNumber );
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'" + city +"'" +
                 " AND " + ROOMS + " = " +"'" + roomNumber +"'" +
                 " AND " +"(" + TYPE + " = " + "'" +value1 +"'" +
                 " OR " + TYPE + " = " + "'" +value2 +"'" +
                 " OR " + TYPE + " = " + "'" +value3 +"'" +")";
-        return sqLiteDatabase.rawQuery(sql,null);
+        String sql2 = "SELECT * FROM building WHERE CITY = '" +
+                city +
+                "' AND" +
+                " ROOMS = '" + roomNumber + "' " +
+                "AND (TYPE = 'Flat' OR TYPE = 'building' OR TYPE = 'Field')";
+        return sqLiteDatabase.rawQuery(sql2,null) ;
     }
     /**Selects the designated data from the table / database **/
     public Cursor Select(String city, String roomNumber, String value1, String value2)
     {
+        System.out.println("roomNumber "+ roomNumber );
+        System.out.println("value1 "+ value1 );
+        System.out.println("value2 "+ value2 );
         SQLiteDatabase sqLiteDatabase =this.getWritableDatabase();
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = "  + "'" + city + "'" +
-                " AND " + ROOMS + " = " + "'" + roomNumber + "'" +
-                " AND " +"("+ TYPE + " = " + "'" + value1 +"'" +
-                " OR " + TYPE + " = " + "'" + value2 +"'"+")" ;
-        return sqLiteDatabase.rawQuery(sql,null);
+        String sql2 = "SELECT * FROM building WHERE CITY = '" +
+                city +
+                "' AND ROOMS = '" +
+                roomNumber+
+                "' AND (TYPE = '" +
+                value1 +
+                "' Or TYPE = '" +
+                value2 + "');";
+        System.out.println("Slq2");
+        return sqLiteDatabase.rawQuery(sql2,null);
 
         
     }
@@ -130,8 +144,6 @@ public class DBHelper extends SQLiteOpenHelper
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + CITY +" = " + "'"+city+"'" +
                 " AND " + ROOMS + " = " + "'" + roomNumber +"'"  +
                 " AND " + TYPE + " = " + "'" + value1+"'"  ;
-        String sql2 = "SELECT * FROM " + " building " + " WHERE " + CITY + " = "+ "'kefalonia'";
-        System.out.println("database: "+sqLiteDatabase.rawQuery(sql,null).toString());
         return sqLiteDatabase.rawQuery(sql,null);
     }
 
