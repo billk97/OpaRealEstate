@@ -56,16 +56,9 @@ public class Sale extends AppCompatActivity {
             public void onClick(View view) {
                 /**calls the function check data from the controller
                  * witch checks if the data is accurate and then calls the DBHelper to do the query **/
-                if(saleControler.CheckIsEmpty(getApplicationContext(),SaleType.getText().toString(),SaleCity.getText().toString(),
-                        SaleStreetName.getText().toString(),SaleStreetNumber.getText().toString(),SalePostNumber.getText().toString(),
-                        SaleDate.getText().toString(),SaleEstateNumber.getText().toString())==false)
-                {
-                    Toast toast = Toast.makeText(getApplicationContext(),"Επιτυχής καταχώρηση",Toast.LENGTH_LONG);
-                    toast.show();
                     saleControler.checkData(getApplicationContext(),SaleType.getText().toString(),SaleCity.getText().toString(),
                             SaleStreetName.getText().toString(),SaleStreetNumber.getText().toString(),SalePostNumber.getText().toString(),
                             SaleDate.getText().toString(),SaleEstateNumber.getText().toString());
-                }
             }
         });
     }

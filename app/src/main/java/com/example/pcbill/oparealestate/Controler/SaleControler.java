@@ -14,17 +14,23 @@ public class SaleControler {
      * which performs the actual Insert in the database**/
     public void checkData(Context context,String Type, String City, String StreetNumber, String StreetName, String PostNumber, String Date, String RoomNuber)
     {
-        /**check ab=n corrects each variable**/
-        Type=CheckInput(Type);
-        City=CheckInput(City);
-        StreetNumber=CheckInput(StreetNumber);
-        StreetName=CheckInput(StreetName);
-        PostNumber=CheckInput(PostNumber);
-        Date=CheckInput(Date);
-        RoomNuber=CheckInput(RoomNuber);
-        DBHelper dbHelper = new DBHelper(context);//context is something that android needs to get the current state
-        /**the actual insert**/
-        dbHelper.Insert(Type, City,  StreetNumber,  StreetName,  PostNumber,  Date,  RoomNuber);
+        if(CheckIsEmpty(context, Type,  City,  StreetNumber,  StreetName,  PostNumber,  Date,  RoomNuber)==false)
+        {
+            /**check ab=n corrects each variable**/
+            Type=CheckInput(Type);
+            City=CheckInput(City);
+            StreetNumber=CheckInput(StreetNumber);
+            StreetName=CheckInput(StreetName);
+            PostNumber=CheckInput(PostNumber);
+            Date=CheckInput(Date);
+            RoomNuber=CheckInput(RoomNuber);
+            DBHelper dbHelper = new DBHelper(context);//context is something that android needs to get the current state
+            /**the actual insert**/
+            dbHelper.Insert(Type, City,  StreetNumber,  StreetName,  PostNumber,  Date,  RoomNuber);
+            Toast toast = Toast.makeText(context,"Επιτυχής καταχώρηση",Toast.LENGTH_LONG);
+            toast.show();
+        }
+
     }
     /**this function checks for any actual malicious threat**/
     //todo filter empty input
